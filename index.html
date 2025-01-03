@@ -23,8 +23,44 @@
         gtag('js', new Date());
         gtag('config', 'UA-151946250-1');
         </script> -->
+        <script>
+            // 初始化图片数组
+            const images = [
+                'images/profile.png',
+                // 'images/profile1.png',
+                // 'images/profile2.png',
+                // 'images/profile3.png',
+                // 添加更多图片路径按需
+            ];
+    
+            // 当前图片索引
+            let currentIndex = 0;
+    
+            function changeImage() {
+                // 增加索引
+                currentIndex++;
+    
+                // 如果超过数组长度，则重置为0
+                if (currentIndex >= images.length) {
+                    currentIndex = 0;
+                }
+    
+                // 获取图片元素并更改其src属性
+                const imgElement = document.getElementById('profileImage');
+                
+                // 可选：添加淡出淡入效果
+                imgElement.style.opacity = 0;
+                setTimeout(() => {
+                    imgElement.src = images[currentIndex];
+                    imgElement.style.opacity = 1;
+                }, 300);
+            }
+        </script>
         <!-- Google tag (gtag.js) -->
         <style>
+            #profileImage {
+                transition: opacity 0.3s ease;
+            }
             span {
                 font-family: 'FangSong', 'STFangsong', serif, 'Lato', Verdana, Helvetica, sans-serif;
                 font-weight: 800;
@@ -114,9 +150,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#misc" class="nav__link">
+                            <a href="#extra" class="nav__link">
                                 <i class="uil uil-scenery nav__icon"></i>
-                                More
+                                Extra
                             </a>
                         </li>
                         <!-- <li>
@@ -154,15 +190,14 @@
                                 <h2 align="center" class="home__title">Jiajun Zhu
                                     <span class="tooltip"><span class="question-mark">「N.B」</span>
                                     <span class="tooltiptext">
-                                        My Chinese given name is 家俊(jiajun), pronounced as 家/dʒia/ 俊/dʒyn/. 
-                                        <br>My Chinese surname is 祝(zhu), pronounced as /tʃu/ or /dʒu/. 
-                                        <br>It’s also fine to call me Lanczos.
+                                        My Chinese name is "祝家俊". 
+                                        <br>It’s also fine to call me Jurray.
                                     </span>
                                     </span>
             
                                 </h2>
                                 <p>
-                                    I'am now a senior student of Mathematics at Zhejiang University, with a minor in the <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Intensive Training Program</a>  of the Chu Kochen Honors College. 
+                                    I'am now a senior student of Mathematics at Zhejiang University, with a minor in <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Entrepreneurship</a>. 
                                     I have been working on explainable machine learning and long-context language model. Beyond that, I am keen to contribute to the following concepts: trustworthiness (e.g., explainability, robustness, safety) and multi-task learners (e.g., large language models, multimodal models). I'm open to collaboration as long as I have the bandwidth.
                                     <!-- I am grateful to receive advice from <a href="http://yangy.org/">Yang Yang</a> and <a href="https://sites.google.com/view/panli-purdue">Pan Li</a>. -->
                                 </p>
@@ -178,7 +213,7 @@
                                 </p>
                             </td>
                             <td style="padding:2.0%;width:30%;max-width:30%">
-                                <img src="images/profile.png" style="width: 100%">
+                                <img id="profileImage" src="images/profile.png" style="width: 100%; cursor: pointer;" onclick="changeImage()">
                             </td>
                         </tr>
                     </tbody>
@@ -197,7 +232,8 @@
                     </div>
                     <ul>
                         <!-- <li>01/2025: <i>Our paper on positional encoding in transformers is accepted to ICLR 2025</i>.</li> -->
-                        <li>07/2024: <i>Our paper on explainable geometric deep learning is released on <a href="https://arxiv.org/abs/2407.00849">arXiv</a></i>.</li>
+                        <!-- <li>07/2024: <i>Our paper on <a href="https://arxiv.org/abs/2501.00712">contextualizing positional embedding</a> is accepted by ICLR 2025</i>.</li> -->
+                        <li>01/2025: <i>Our paper on <a href="https://arxiv.org/abs/2407.00849">explainable geometric deep learning</a> is accepted by Nature Machine Intelligence</i>.</li>
                     </ul>
                 </div>
             </section>
@@ -296,14 +332,13 @@
 
 
           
-            <section class="section" id="misc">
+            <section class="section" id="extra">
                 <div class="container grid">
-                    <div class="paragraph"><span class="left-braket">「</span>Misc<span class="right-braket">」</span>
+                    <div class="paragraph"><span class="left-braket">「</span>Extra<span class="right-braket">」</span>
                         <!-- <br><hr> -->
                     </div>
                     <p>
-                        In addition to my academic interest in AI, I am also fascinated by the following topics.
-
+                        I aspire to be a compassionate yet influential individual. In addition to my academic interest in AI, I am fascinated by cutting-edge technologies such as brain-computer interfaces and blockchain, the inherent traits of successful entrepreneurs, and practical and effective ways to promote social good. My role models include Charlie Munger, Stephen Curry, Sin Chang-won, and many of my kind and intelligent peers.
                         <!-- Feel free to contact me if there is a chance for communication. I'm glad to know that we share common interests. -->
                     </p>
                     <!-- <details> -->
@@ -314,23 +349,23 @@
                             I'm contemplating the development of an LLM-powered agent designed for education. <i>Education extends beyond just textbooks and curriculums; it thrives on personalized interactions.</i>
                             If this vision resonates with you and you're interested in contributing, please don't hesitate to reach out. -->
                     <!-- </details> -->
-                    <details>
+                    <!-- <details>
                         <summary>Cutting-edge technologies</summary>
-                            Before delving into AI research, I gained experience in other fields such as human-computer interface and blockchain.
+                            Before delving into AI research, I gained experience in other fields such as brain-computer interface and blockchain.
                             I am convinced that these technologies, just like the presence of ChatGPT, will have a profound impact on our lives. 
-                    </details>
-                    <details>
+                    </details> -->
+                    <!-- <details>
                         <summary>Entrepreneurship</summary>
                             I have interviewed several successful Chinese entrepreneurs including
-                                Jingfan Wang (Forbes China 30 Under 30 2020), Yi Fang (CEO of Merit Interactive Co., Ltd.), as well as other alumni of the <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Intensive Training Program</a> (ITP).
-                                Their captivating stories have led me to ponder over the following questions: What sets apart individuals who become exceptional entrepreneurs from others? 
-                                How does entrepreneurship evolve and thrive on a <i>macroscopic</i> or <i>microscopic</i> scale over time?
+                                Jingfan Wang (Forbes China 30 Under 30 2020), Yi Fang (CEO of Merit Interactive Co., Ltd.), as well as other alumni from our minor program, the <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Intensive Training Program</a> (ITP).
+                                Their captivating stories have prompted me to consider the following question: What distinguishes individuals who become exceptional entrepreneurs from others?
+
                     </details>
                     <details>
                         <summary>Social Good</summary>
                             I have participated in numerous volunteer activities aimed at supporting vulnerable individuals like assisting individuals with disabilities and teaching underprivileged children. 
                             I was astonished by the hardships they endured and always feel a sense of obligation to help them whenever I am capable. 
-                    </details>
+                    </details> -->
                 </div> 
                 
             </section>
