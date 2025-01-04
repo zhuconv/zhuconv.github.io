@@ -677,7 +677,8 @@ a.btn:hover {
     column-gap: 2rem;
   }
   .nav__menu{
-    margin-left: auto;
+    margin-left: 45vw;
+    /* margin-right: auto; */
   }
   
   /* .home__container{
