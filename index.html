@@ -426,7 +426,8 @@
                 <p style="text-align:right;">
                     Website template: <a href="https://jonbarron.info/">Jon Barron's</a> and <a href="https://ai.stanford.edu/~yzzhang/">Yunzhi Zhang's</a>
                     <br>
-                    Last updated: Mar. 2025
+                    <div style="text-align:right;" id="currentDate"></div>
+
                   </p>
             </div>
         </main>
@@ -441,6 +442,26 @@
 
         <!--==================== MAIN JS ====================-->
         <script src="main.js"></script>
+        <script>
+            // 获取当前日期
+            const now = new Date();
+            
+            // 月份缩写数组
+            const monthNames = [
+              "Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.",
+              "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
+            ];
+            
+            // 获取月份缩写和年份
+            const month = monthNames[now.getMonth()]; // 获取英文缩写月份
+            const year = now.getFullYear();           // 获取4位数年份
+            
+            // 组合成 "Jun. 2025" 格式
+            const formattedDate = `Last updated: ${month} ${year}`;
+            
+            // 显示到页面
+            document.getElementById("currentDate").textContent = formattedDate;
+        </script>
         <!--Hide paper abstract by default-->
         <script xml:space="preserve">
             hideblock("vest_abs");
