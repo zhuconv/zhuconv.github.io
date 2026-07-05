@@ -283,6 +283,49 @@ a.anchor {
 /* .home__container{
   gap: 1rem;
 } */
+.intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30%;
+  grid-template-areas:
+    "title photo"
+    "bio photo"
+    "email photo"
+    "links photo";
+  column-gap: 1.5rem;
+  align-items: center;
+}
+
+.intro-title {
+  grid-area: title;
+  text-align: center;
+}
+
+.intro-bio {
+  grid-area: bio;
+}
+
+.intro-email {
+  grid-area: email;
+  text-align: center;
+}
+
+.intro-links {
+  grid-area: links;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.intro-photo {
+  grid-area: photo;
+  padding: 2%;
+}
+
+.intro-photo img {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
 .home__content{
   display: grid;
   grid-template-columns: auto 270px;
@@ -574,6 +617,33 @@ a.btn:hover {
   background: #f5f5f5,
 }
 
+.chat-booking {
+  justify-self: start;
+}
+
+.chat-booking-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+  background: var(--global-theme-color);
+  color: #fff;
+  font-weight: var(--font-medium);
+  line-height: 1;
+}
+
+.chat-booking-button:link,
+.chat-booking-button:visited,
+.chat-booking-button:hover {
+  color: #fff;
+}
+
+.chat-booking-button:hover {
+  background: #224b8d;
+}
+
 
 
 /*==================== FOOTER ====================*/
@@ -595,6 +665,46 @@ a.btn:hover {
 
 /*==================== MEDIA QUERIES ====================*/
 /* For small devices */
+@media screen and (max-width: 767px){
+  body {
+    text-align: left;
+  }
+
+  .intro-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "photo"
+      "bio"
+      "email"
+      "links";
+    row-gap: 0.75rem;
+  }
+
+  .intro-title {
+    margin-bottom: 0;
+  }
+
+  .intro-photo {
+    justify-self: center;
+    width: min(180px, 48vw);
+    padding: 0;
+  }
+
+  .intro-bio {
+    text-align: left;
+  }
+
+  .intro-email,
+  .intro-links {
+    overflow-wrap: anywhere;
+  }
+
+  .intro-links {
+    line-height: 1.8;
+  }
+}
+
 @media screen and (max-width: 350px){
   /* .container{
     margin-left: var(--mb-1);
