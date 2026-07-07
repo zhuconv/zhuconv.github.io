@@ -708,26 +708,25 @@ a.btn:hover {
   .intro-links {
     line-height: 1.8;
   }
-}
 
-@media screen and (max-width: 420px){
   .research__content {
-    grid-template-columns: 80px minmax(0, 1fr);
-    column-gap: 0.5rem;
+    grid-template-columns: 1fr;
+    row-gap: 0.65rem;
   }
 
   .research__content-teaser {
-    width: 80px;
-    height: 80px;
+    justify-self: center;
+    width: min(240px, 72vw);
+    height: auto;
+  }
+
+  .research__content-teaser img {
+    display: block;
+    width: 100%;
   }
 
   .research__content-info-attribute {
-    gap: 0.35rem;
-  }
-
-  a.btn {
-    font-size: 11px;
-    padding: 0.2rem 0.4rem;
+    margin-top: 0.35rem;
   }
 }
 
