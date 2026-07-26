@@ -37,6 +37,7 @@
     --toggle-hover-color: rgba(0, 53, 167, 0.08);
     --focus-color: #0035a7;
     --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --paper-image-background: #fff;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
 
@@ -100,6 +101,7 @@ html[data-theme="dark"] {
     --toggle-hover-color: rgba(143, 182, 255, 0.12);
     --focus-color: #8fb6ff;
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    --paper-image-background: #000;
     --scroll-bar-color: hsl(var(--hue-color), 10%, 18%);
     --scroll-thumb-color: hsl(var(--hue-color), 10%, 32%);
 }
@@ -264,6 +266,8 @@ a.anchor {
 }
 
 .theme-toggle {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -280,6 +284,7 @@ a.anchor {
   font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
+  touch-action: manipulation;
   transition: background-color .2s ease, color .2s ease, transform .2s ease;
 }
 
@@ -493,13 +498,11 @@ a.btn {
   align-items: center;
   font-family: 'Georgia', serif;
   font-size: 12px; /* Adjust this as needed */
+  line-height: 1.4;
   color: var(--global-text-color);
   border: 1px solid var(--global-text-color);
   box-shadow: none;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0.2rem 0.42rem;
   margin: 0;
   /* margin-top: 0.5em; */
   /* margin-bottom: 0.5em; */
@@ -701,7 +704,7 @@ html[data-theme="dark"] a.btn:hover {
   place-items: center;
   width: 128px;
   height: 128px;
-  background: #fff;
+  background: var(--paper-image-background);
   overflow: hidden;
 }
 
@@ -711,7 +714,7 @@ html[data-theme="dark"] a.btn:hover {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  background: #fff;
+  background: var(--paper-image-background);
 }
 
 .paper-image-zoom,
@@ -767,7 +770,7 @@ body.image-lightbox-open {
   max-height: calc(100dvh - 5rem);
   margin: auto;
   object-fit: contain;
-  background: #fff;
+  background: var(--paper-image-background);
 }
 
 .image-lightbox__caption {

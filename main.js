@@ -85,6 +85,44 @@ if(themeMedia.addEventListener){
     themeMedia.addListener(followSystemTheme)
 }
 
+/*==================== NAME NOTE TOOLTIP ====================*/
+function initNameNote(){
+    const nameNote = document.querySelector('.tooltip'),
+          nameNoteTrigger = nameNote ? nameNote.querySelector('.question-mark') : null,
+          nameNoteContent = nameNote ? nameNote.querySelector('.tooltiptext') : null
+
+    if(!nameNote || !nameNoteTrigger || !nameNoteContent){
+        return
+    }
+
+    function setNameNoteOpen(isOpen){
+        nameNote.classList.toggle('is-open', isOpen)
+        nameNoteTrigger.setAttribute('aria-expanded', String(isOpen))
+        nameNoteContent.setAttribute('aria-hidden', String(!isOpen))
+    }
+
+    setNameNoteOpen(false)
+
+    nameNoteTrigger.addEventListener('click', () => {
+        setNameNoteOpen(!nameNote.classList.contains('is-open'))
+    })
+
+    document.addEventListener('click', event => {
+        if(!nameNote.contains(event.target)){
+            setNameNoteOpen(false)
+        }
+    })
+
+    document.addEventListener('keydown', event => {
+        if(event.key === 'Escape' && nameNote.classList.contains('is-open')){
+            setNameNoteOpen(false)
+            nameNoteTrigger.focus()
+        }
+    })
+}
+
+initNameNote()
+
 /*==================== PAPER IMAGE LIGHTBOX ====================*/
 function initPaperImageLightbox(){
     const paperImages = document.querySelectorAll(

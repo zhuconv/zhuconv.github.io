@@ -28,7 +28,7 @@
         </script>
         <!--==================== CSS ====================-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous">
-        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="stylesheet.css?v=20260726-1">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151946250-1"></script>
@@ -84,6 +84,7 @@
             .tooltip {
                 position: relative;
                 display: inline-block;
+                opacity: 1;
                 /* border-bottom: 1px dotted black; 悬停元素上显示点线 */
             }
 
@@ -102,28 +103,61 @@
             }
 
             .question-mark {
+                appearance: none;
+                display: inline;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
                 cursor: pointer;
+                font-family: 'FangSong', 'STFangsong', serif, 'Lato', Verdana, Helvetica, sans-serif;
                 font-weight: bold;
                 color: var(--note-color);
                 font-size: 30%; /* Adjust the font size to make it smaller */
+                line-height: 1;
                 vertical-align: top; /* Display the question mark as a superscript */
-                }
+            }
+
+            .question-mark:focus-visible {
+                outline: 2px solid var(--focus-color);
+                outline-offset: 2px;
+                border-radius: 2px;
+            }
             
 
             .tooltip .tooltiptext {
                 visibility: hidden;
                 position: absolute;
+                top: calc(100% + 0.35rem);
+                left: 50%;
+                z-index: var(--z-tooltip);
+                transform: translateX(-50%);
                 background-color: var(--tooltip-color);
-                width: 20vw;
-                padding: 5px;
+                width: min(18rem, calc(100vw - 2rem));
+                padding: 0.5rem 0.65rem;
                 border: 1px solid var(--tooltip-border-color);
                 border-radius: 4px;
                 box-shadow: var(--tooltip-shadow);
                 font-size: 60%;
+                line-height: 1.4;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.15s ease;
             }
 
-            .tooltip:hover .tooltiptext {
+            .tooltip.is-open .tooltiptext {
                 visibility: visible;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                .tooltip:hover .tooltiptext {
+                    visibility: visible;
+                    opacity: 1;
+                    pointer-events: auto;
+                }
             }
 
         </style>
@@ -195,8 +229,9 @@
                 <div class="container">
                     <div class="intro-layout">
                         <h2 class="home__title intro-title">Jiajun Zhu
-                            <span class="tooltip"><span class="question-mark">「N.B」</span>
-                            <span class="tooltiptext">
+                            <span class="tooltip"><button class="question-mark" type="button"
+                                    aria-expanded="false" aria-controls="name-note">「N.B」</button>
+                            <span class="tooltiptext" id="name-note" role="tooltip">
                                 My Chinese name is "祝家俊".
                                 <br>You can call me Jun for short.
                             </span>
@@ -460,7 +495,7 @@
 <!--        </footer>-->
 
         <!--==================== MAIN JS ====================-->
-        <script src="main.js"></script>
+        <script src="main.js?v=20260726-1"></script>
         <script>
             // 通过 GitHub API 获取最近一次 commit 的时间
             const monthNames = [
