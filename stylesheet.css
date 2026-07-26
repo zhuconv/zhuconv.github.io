@@ -37,7 +37,7 @@
     --toggle-hover-color: rgba(0, 53, 167, 0.08);
     --focus-color: #0035a7;
     --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    --paper-image-background: #fff;
+    --paper-image-background: transparent;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
 
@@ -101,7 +101,6 @@ html[data-theme="dark"] {
     --toggle-hover-color: rgba(143, 182, 255, 0.12);
     --focus-color: #8fb6ff;
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    --paper-image-background: #000;
     --scroll-bar-color: hsl(var(--hue-color), 10%, 18%);
     --scroll-thumb-color: hsl(var(--hue-color), 10%, 32%);
 }
