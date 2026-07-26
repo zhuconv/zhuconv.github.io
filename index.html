@@ -10,7 +10,9 @@
         <!--==================== UNICONS ====================-->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
 
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:400,400italic,500,500italic,600,600italic,700,700italic">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
         <script>
             // Apply the saved/system theme before styles render to avoid a flash.
             (() => {
@@ -28,7 +30,7 @@
         </script>
         <!--==================== CSS ====================-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous">
-        <link rel="stylesheet" href="stylesheet.css?v=20260726-2">
+        <link rel="stylesheet" href="stylesheet.css?v=20260726-3">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151946250-1"></script>
@@ -76,30 +78,12 @@
             #profileImage {
                 transition: opacity 0.3s ease;
             }
-            span {
-                font-family: 'FangSong', 'STFangsong', serif, 'Lato', Verdana, Helvetica, sans-serif;
-                font-weight: 800;
-            }
 
             .tooltip {
                 position: relative;
                 display: inline-block;
                 opacity: 1;
                 /* border-bottom: 1px dotted black; 悬停元素上显示点线 */
-            }
-
-            .left-braket {
-                /* font-weight: bold; */
-                /* color: #8C1515;  */
-                font-size: 50%; 
-                vertical-align: top;
-            }
-
-            .right-braket {
-                /* font-weight: bold; */
-                /* color: #8C1515;  */
-                font-size: 50%; 
-                /* vertical-align: bottom; */
             }
 
             .question-mark {
@@ -141,6 +125,7 @@
                 box-shadow: var(--tooltip-shadow);
                 font-size: 60%;
                 line-height: 1.4;
+                font-weight: normal;
                 opacity: 0;
                 pointer-events: none;
                 transition: opacity 0.15s ease;
@@ -265,13 +250,13 @@
             <!--==================== NEWS ====================-->
             <section class="section" id="news">
                 <div class="container grid">
-                    <div class="paragraph"><span class="left-braket">「</span>News<span class="right-braket">」</span>
+                    <div class="paragraph">News
                         <!-- <br><hr> -->
                     </div>
                     <ul>
-                        <li>05/2026: <i>Our paper on <a href="https://arxiv.org/abs/2605.29828">theory for graph foundation models</a> has been accepted to ICML 2026.</i></li>
-                        <li>05/2025: <i>Our paper on <a href="https://arxiv.org/abs/2501.00712">contexualized positional embedding</a> is accepted by ICML 2025</i>.</li>
-                        <li>01/2025: <i>Our paper on <a href="https://www.nature.com/articles/s42256-025-00998-9">explainable geometric deep learning</a> is accepted by Nature Machine Intelligence</i>.</li>
+                        <li><span class="news-date">05/2026</span><span class="news-body"><i>Our paper on <a href="https://arxiv.org/abs/2605.29828">theory for graph foundation models</a> has been accepted to ICML 2026.</i></span></li>
+                        <li><span class="news-date">05/2025</span><span class="news-body"><i>Our paper on <a href="https://arxiv.org/abs/2501.00712">contexualized positional embedding</a> is accepted by ICML 2025</i>.</span></li>
+                        <li><span class="news-date">01/2025</span><span class="news-body"><i>Our paper on <a href="https://www.nature.com/articles/s42256-025-00998-9">explainable geometric deep learning</a> is accepted by Nature Machine Intelligence</i>.</span></li>
                     </ul>
                 </div>
             </section>
@@ -282,7 +267,7 @@
                 <!-- <h2 class="section__title">Research</h2> -->
                 <!-- <span class="section__subtitle">Publications</span> -->
                 <div class="services__container container grid">
-                    <div class="paragraph"><span class="left-braket">「</span>Research<span class="right-braket">」</span>
+                    <div class="paragraph">Research
                         <!-- <br><hr> -->
                     </div>
                     
@@ -423,7 +408,7 @@
           
             <section class="section" id="extra">
                 <div class="container grid">
-                    <div class="paragraph"><span class="left-braket">「</span>Extra<span class="right-braket">」</span>
+                    <div class="paragraph">Extra
                         <!-- <br><hr> -->
                     </div>
                     <p>
@@ -461,7 +446,7 @@
             <!--==================== CHAT ====================-->
             <section class="section" id="chat">
                 <div class="container grid">
-                    <div class="paragraph"><span class="left-braket">「</span>Chat<span class="right-braket">」</span>
+                    <div class="paragraph">Chat
                         <!-- <br><hr> -->
                     </div>
                     <p>

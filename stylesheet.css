@@ -45,7 +45,7 @@
     /* --body-font: 'Crimson Text', serif; */
     /*--body-font: "Palatino Linotype", "Book Antiqua", Palatino, serif;*/
     /*--body-font: Palatino, serif;*/
-    --body-font: "Asap", sans-serif;
+    --body-font: "Asap", -apple-system, "Segoe UI", Arial, sans-serif;
 
     /* .5rem = 8px, 1rem = 16px, 1.5rem = 24px ... */
     --big-font-size: 2.5rem;
@@ -142,7 +142,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Lora", Georgia, serif;
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
 }
@@ -192,10 +192,31 @@ img {
 }
 
 .paragraph {
-  /* font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino, serif;; */
-  font-weight: 500;
+  font-family: "Lora", Georgia, serif;
+  font-weight: 600;
   font-size: var(--h3-font-size);
   color: var(--title-color);
+}
+
+/*==================== NEWS LIST ====================*/
+#news ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  row-gap: .4rem;
+}
+
+#news li {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: .75rem;
+  text-align: left;
+}
+
+.news-date {
+  font-weight: 600;
+  color: var(--title-color);
+  font-variant-numeric: tabular-nums;
 }
 
 /*==================== LAYOUT ====================*/
