@@ -11,6 +11,21 @@
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
 
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:400,400italic,500,500italic,600,600italic,700,700italic">
+        <script>
+            // Apply the saved/system theme before styles render to avoid a flash.
+            (() => {
+                let savedTheme = null;
+                try {
+                    savedTheme = localStorage.getItem('homepage-theme');
+                } catch (_) {}
+
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme =
+                    savedTheme === 'light' || savedTheme === 'dark'
+                        ? savedTheme
+                        : (prefersDark ? 'dark' : 'light');
+            })();
+        </script>
         <!--==================== CSS ====================-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous">
         <link rel="stylesheet" href="stylesheet.css">
@@ -66,11 +81,6 @@
                 font-weight: 800;
             }
 
-            .dark-mode {
-                background-color: black;
-                color: white;
-            }
-
             .tooltip {
                 position: relative;
                 display: inline-block;
@@ -94,7 +104,7 @@
             .question-mark {
                 cursor: pointer;
                 font-weight: bold;
-                color: #8C1515; /* Change the color as needed */
+                color: var(--note-color);
                 font-size: 30%; /* Adjust the font size to make it smaller */
                 vertical-align: top; /* Display the question mark as a superscript */
                 }
@@ -103,12 +113,12 @@
             .tooltip .tooltiptext {
                 visibility: hidden;
                 position: absolute;
-                background-color: #f9f9f9;
+                background-color: var(--tooltip-color);
                 width: 20vw;
                 padding: 5px;
-                border: 1px solid #ccc;
+                border: 1px solid var(--tooltip-border-color);
                 border-radius: 4px;
-                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                box-shadow: var(--tooltip-shadow);
                 font-size: 60%;
             }
 
@@ -160,21 +170,15 @@
                                 Chat
                             </a>
                         </li>
-                        <!-- <li>
-                            <button onclick="myFunction()">Mode</button>
-
-                                <script>
-                                function myFunction() {
-                                var element = document.body;
-                                element.classList.toggle("dark-mode");
-                                }
-                                </script>
-                        </li> -->
                     </ul>
                     <i class="uil uil-times nav__close" id="nav-close"></i>
                 </div>
 
                 <div class="nav__btns">
+                    <button class="theme-toggle" id="theme-toggle" type="button"
+                            aria-label="Switch to dark mode" title="Switch to dark mode">
+                        <i class="uil uil-moon" aria-hidden="true"></i>
+                    </button>
                     <div class="nav__toggle" id="nav-toggle">
                         <i class="uil uil-apps"></i>
                     </div>
@@ -194,14 +198,14 @@
                             <span class="tooltip"><span class="question-mark">「N.B」</span>
                             <span class="tooltiptext">
                                 My Chinese name is "祝家俊".
-                                <br>It’s also fine to call me Jun.
+                                <br>You can call me Jun for short.
                             </span>
                             </span>
 
                         </h2>
                         <p class="intro-bio">
-                            I am currently a PhD student at University of Texas at Austin, advised by <a href="https://www.vita-group.space/pi">Atlas Wang</a> and <a href="https://www.cs.utexas.edu/~akella/">Aditya Akella</a> and work closely with <a href="https://sites.google.com/view/panli-purdue">Pan Li</a> at Gatech. I previously graduated from Zhejiang University with a major in Mathematics and a minor in  <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Entrepreneurship</a>.
-                            I have been working on explainable AI and large language model architectures. Broadly, my research scope is around trustworthiness (e.g., persona steering, preference alignment) and efficiency (e.g., inference acceleration, efficient architectures). I advocate for rigorous evaluation frameworks, grounded in FAIR principles, for next-generation infrastructure (models, data, algorithms, and systems optimizations), as exemplified by <a href="https://marin.community/">Marin</a>. Feel free to reach out if you’d like to collaborate or <a href="#chat">chat</a>.
+                            I am currently a PhD student at University of Texas at Austin, advised by <a href="https://www.vita-group.space/pi">Atlas Wang</a> and <a href="https://www.cs.utexas.edu/~akella/">Aditya Akella</a> and working closely with <a href="https://sites.google.com/view/panli-purdue">Pan Li</a> at Gatech. I previously graduated from Zhejiang University with a major in Math and a minor in  <a href="http://ckc.zju.edu.cn/ckcen/2022/0225/c44633a2500643/page.htm">Entrepreneurship</a>.
+                            I have been architecting language models and agents. Broadly, my research focuses on efficient intelligence and the fundamentals of agents. Feel free to reach out if you’d like to collaborate or <a href="#chat">chat</a>.
                             <!-- I am grateful to receive advice from <a href="http://yangy.org/">Yang Yang</a> and <a href="https://sites.google.com/view/panli-purdue">Pan Li</a>. -->
                         </p>
                         <p class="intro-email">
@@ -273,7 +277,7 @@
                     <div class="services__content">
                         <div class="research__content">
                             <div class="research__content-teaser">
-                                <img src='images/papers/gfm_demo.png' alt="From domain A to domain B" title="From domain A to domain B">
+                                <img src="images/papers/graphfm.png" alt="From domain A to domain B" title="From domain A to domain B">
                             </div>
                             <div class="research__content-info">
                                 <div class="research__content-info-title">When Do Graph Foundation Models Transfer? A Data-Centric Theory</div>
@@ -300,7 +304,7 @@
                     <div class="services__content">
                         <div class="research__content">
                             <div class="research__content-teaser">
-                                <img src='images/papers/tape.png' alt="Overview of our proposed TAPE in standard decoder-only architecture" title="Overview of our proposed TAPE in standard decoder-only architecture">
+                                <img src="images/papers/tape.png" alt="Overview of our proposed TAPE in standard decoder-only architecture" title="Overview of our proposed TAPE in standard decoder-only architecture">
                             </div>
                             <div class="research__content-info">
                                 <div class="research__content-info-title">Rethinking Addressing in Language Models via Contextualized Equivariant Positional Encoding</div>
@@ -329,7 +333,7 @@
                     <div class="services__content">
                         <div class="research__content">
                             <div class="research__content-teaser">
-                                <img src='images/papers/xgdl.png' alt="Overview of geometric deep learning model interpretation and its evaluation" title="Overview of geometric deep learning model interpretation and its evaluation">
+                                <img src="images/papers/xgdl.png" alt="Overview of geometric deep learning model interpretation and its evaluation" title="Overview of geometric deep learning model interpretation and its evaluation">
                             </div>
                             <div class="research__content-info">
                                 <div class="research__content-info-title">Towards Unveiling Sensitive and Decisive Patterns in Explainable
@@ -388,7 +392,7 @@
                         <!-- <br><hr> -->
                     </div>
                     <p>
-                        In addition to my academic interest in AI, I am fascinated by other cutting-edge technologies such as brain-computer interfaces and blockchains. I also enjoy reading biographies, learning from people I admire—especially entrepreneurs—and thinking about how to contribute meaningfully to society. My role models include Charlie Munger for his wisdom, Stephen Curry for his grit, Li Jian (李健) for his serenity, as well as many of my kind, thoughtful, and intelligent peers.
+                        In addition to my academic interest in AI, I am fascinated by other cutting-edge technologies such as brain-computer interfaces and blockchains. I also enjoy reading biographies, learning from people I admire—especially entrepreneurs—and thinking about how to contribute meaningfully to society. My role models include Charlie Munger for his wisdom, Stephen Curry for his grit, Li Jian (李健) for his serenity, as well as many of my kind and intelligent peers.
                     </p>
                     <!-- <details> -->
                         <!-- <summary>Next-generation human-machine relationships</summary>

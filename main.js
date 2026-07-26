@@ -29,6 +29,151 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
+/*==================== LIGHT / DARK THEME ====================*/
+const themeToggle = document.getElementById('theme-toggle'),
+      themeIcon = themeToggle ? themeToggle.querySelector('i') : null,
+      themeMedia = window.matchMedia('(prefers-color-scheme: dark)'),
+      themeStorageKey = 'homepage-theme'
+
+function getSavedTheme(){
+    try {
+        const theme = localStorage.getItem(themeStorageKey)
+        return theme === 'light' || theme === 'dark' ? theme : null
+    } catch (_) {
+        return null
+    }
+}
+
+function saveTheme(theme){
+    try {
+        localStorage.setItem(themeStorageKey, theme)
+    } catch (_) {}
+}
+
+function applyTheme(theme){
+    const isDark = theme === 'dark'
+    document.documentElement.dataset.theme = isDark ? 'dark' : 'light'
+
+    if(themeToggle && themeIcon){
+        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode'
+        themeIcon.classList.toggle('uil-sun', isDark)
+        themeIcon.classList.toggle('uil-moon', !isDark)
+        themeToggle.setAttribute('aria-label', label)
+        themeToggle.title = label
+    }
+}
+
+applyTheme(document.documentElement.dataset.theme)
+
+if(themeToggle){
+    themeToggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+        applyTheme(nextTheme)
+        saveTheme(nextTheme)
+    })
+}
+
+function followSystemTheme(event){
+    if(!getSavedTheme()){
+        applyTheme(event.matches ? 'dark' : 'light')
+    }
+}
+
+if(themeMedia.addEventListener){
+    themeMedia.addEventListener('change', followSystemTheme)
+} else if(themeMedia.addListener){
+    themeMedia.addListener(followSystemTheme)
+}
+
+/*==================== PAPER IMAGE LIGHTBOX ====================*/
+function initPaperImageLightbox(){
+    const paperImages = document.querySelectorAll(
+        '.research__content-teaser img, .paper__section-grid img, .js-image-zoom'
+    )
+
+    if(!paperImages.length){
+        return
+    }
+
+    const lightbox = document.createElement('div')
+    lightbox.className = 'image-lightbox'
+    lightbox.setAttribute('role', 'dialog')
+    lightbox.setAttribute('aria-modal', 'true')
+    lightbox.setAttribute('aria-label', 'Enlarged paper image')
+    lightbox.setAttribute('aria-hidden', 'true')
+    lightbox.innerHTML = `
+        <button class="image-lightbox__close" type="button" aria-label="Close enlarged image" title="Close">
+            <i class="uil uil-times" aria-hidden="true"></i>
+        </button>
+        <figure class="image-lightbox__figure">
+            <img class="image-lightbox__image" alt="">
+            <figcaption class="image-lightbox__caption"></figcaption>
+        </figure>
+    `
+    document.body.appendChild(lightbox)
+
+    const enlargedImage = lightbox.querySelector('.image-lightbox__image')
+    const caption = lightbox.querySelector('.image-lightbox__caption')
+    const closeButton = lightbox.querySelector('.image-lightbox__close')
+    let sourceImage = null
+
+    function openLightbox(image){
+        sourceImage = image
+        enlargedImage.src = image.currentSrc || image.src
+        enlargedImage.alt = image.alt
+        caption.textContent = image.title || image.alt
+        caption.hidden = !caption.textContent
+        lightbox.classList.add('is-open')
+        lightbox.setAttribute('aria-hidden', 'false')
+        document.body.classList.add('image-lightbox-open')
+        closeButton.focus()
+    }
+
+    function closeLightbox(){
+        if(!lightbox.classList.contains('is-open')){
+            return
+        }
+
+        lightbox.classList.remove('is-open')
+        lightbox.setAttribute('aria-hidden', 'true')
+        document.body.classList.remove('image-lightbox-open')
+        enlargedImage.removeAttribute('src')
+
+        if(sourceImage){
+            sourceImage.focus()
+            sourceImage = null
+        }
+    }
+
+    paperImages.forEach(image => {
+        image.classList.add('paper-image-zoom')
+        image.tabIndex = 0
+        image.setAttribute('role', 'button')
+        image.setAttribute('aria-haspopup', 'dialog')
+        image.addEventListener('click', () => openLightbox(image))
+        image.addEventListener('keydown', event => {
+            if(event.key === 'Enter' || event.key === ' '){
+                event.preventDefault()
+                openLightbox(image)
+            }
+        })
+    })
+
+    closeButton.addEventListener('click', closeLightbox)
+    lightbox.addEventListener('click', event => {
+        if(event.target === lightbox){
+            closeLightbox()
+        }
+    })
+    document.addEventListener('keydown', event => {
+        if(event.key === 'Escape'){
+            closeLightbox()
+        }
+    })
+}
+
+initPaperImageLightbox()
+
 /*==================== PUBLICATIONS ====================*/
 
 // from: http://www.robots.ox.ac.uk/~vedaldi/assets/hidebib.js
@@ -71,141 +216,7 @@ function toggleblock(blockId)
 function hideblock(blockId)
 {
    var block = document.getElementById(blockId);
-   block.style.display = 'none' ;
+   if (block) {
+       block.style.display = 'none' ;
+   }
 }
-
-/*==================== PAPER TEASER ASPECT PADDING ====================*/
-function initTeaserAspectPadding()
-{
-    var teaserImages = document.querySelectorAll('.research__content-teaser img');
-    var targetRatio = 1;
-    var ratioTolerance = 0.02;
-
-    function markPaddingDirection(image)
-    {
-        if (!image.naturalWidth || !image.naturalHeight) {
-            return;
-        }
-
-        var teaser = image.closest('.research__content-teaser');
-        if (!teaser) {
-            return;
-        }
-
-        var imageRatio = image.naturalWidth / image.naturalHeight;
-        var paddingDirection = 'none';
-
-        if (imageRatio > targetRatio + ratioTolerance) {
-            paddingDirection = 'vertical';
-        } else if (imageRatio < targetRatio - ratioTolerance) {
-            paddingDirection = 'horizontal';
-        }
-
-        teaser.setAttribute('data-padding', paddingDirection);
-    }
-
-    teaserImages.forEach(function(image) {
-        if (image.complete) {
-            markPaddingDirection(image);
-        } else {
-            image.addEventListener('load', function() {
-                markPaddingDirection(image);
-            }, { once: true });
-        }
-    });
-}
-
-/*==================== IMAGE LIGHTBOX ====================*/
-function initImageLightbox()
-{
-    var zoomImages = document.querySelectorAll('.research__content-teaser img, .paper__section-grid img, .js-image-zoom');
-    if (!zoomImages.length) {
-        return;
-    }
-
-    var lightbox = document.createElement('div');
-    lightbox.className = 'image-lightbox';
-    lightbox.setAttribute('role', 'dialog');
-    lightbox.setAttribute('aria-modal', 'true');
-    lightbox.setAttribute('aria-label', 'Enlarged image');
-    lightbox.innerHTML =
-        '<button class="image-lightbox__close" type="button" aria-label="Close enlarged image">&times;</button>' +
-        '<figure class="image-lightbox__figure">' +
-            '<img class="image-lightbox__image" alt="">' +
-            '<figcaption class="image-lightbox__caption"></figcaption>' +
-        '</figure>';
-
-    document.body.appendChild(lightbox);
-
-    var lightboxImage = lightbox.querySelector('.image-lightbox__image');
-    var lightboxCaption = lightbox.querySelector('.image-lightbox__caption');
-    var closeButton = lightbox.querySelector('.image-lightbox__close');
-    var activeTrigger = null;
-
-    function openLightbox(image)
-    {
-        activeTrigger = image;
-        lightboxImage.src = image.currentSrc || image.src;
-        lightboxImage.alt = image.alt || '';
-        lightboxCaption.textContent = image.alt || '';
-        lightbox.classList.add('is-open');
-        document.body.classList.add('image-lightbox-open');
-        closeButton.focus();
-    }
-
-    function closeLightbox()
-    {
-        lightbox.classList.remove('is-open');
-        document.body.classList.remove('image-lightbox-open');
-        lightboxImage.removeAttribute('src');
-
-        if (activeTrigger) {
-            activeTrigger.focus();
-            activeTrigger = null;
-        }
-    }
-
-    zoomImages.forEach(function(image) {
-        image.classList.add('js-image-zoom');
-
-        if (!image.hasAttribute('tabindex')) {
-            image.tabIndex = 0;
-        }
-
-        if (!image.hasAttribute('role')) {
-            image.setAttribute('role', 'button');
-        }
-
-        if (!image.hasAttribute('title')) {
-            image.setAttribute('title', 'Click to enlarge');
-        }
-
-        image.addEventListener('click', function() {
-            openLightbox(image);
-        });
-
-        image.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                openLightbox(image);
-            }
-        });
-    });
-
-    closeButton.addEventListener('click', closeLightbox);
-
-    lightbox.addEventListener('click', function(event) {
-        if (event.target === lightbox) {
-            closeLightbox();
-        }
-    });
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
-            closeLightbox();
-        }
-    });
-}
-
-initTeaserAspectPadding();
-initImageLightbox();
