@@ -837,33 +837,6 @@ body.image-lightbox-open {
   background: #f5f5f5,
 }
 
-.chat-booking {
-  justify-self: start;
-}
-
-.chat-booking-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: 0.7rem 1rem;
-  border-radius: 4px;
-  background: var(--global-theme-color);
-  color: #fff;
-  font-weight: var(--font-medium);
-  line-height: 1;
-}
-
-.chat-booking-button:link,
-.chat-booking-button:visited,
-.chat-booking-button:hover {
-  color: #fff;
-}
-
-.chat-booking-button:hover {
-  background: #224b8d;
-}
-
 
 
 /*==================== FOOTER ====================*/
