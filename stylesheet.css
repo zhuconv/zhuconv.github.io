@@ -699,7 +699,10 @@ html[data-theme="dark"] a.btn:hover {
   /* align-items: center; */
 }
 .research__content-info-title {
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  line-height: 1.4;
 }
 .research__content-info-venue {
   font-style: italic;
