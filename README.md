@@ -1,5 +1,12 @@
 Template adapted from [Jon Barron's website](https://jonbarron.info/) and [Yunzhi Zhang's website](https://ai.stanford.edu/~yzzhang/).
 
+## Personal portal
+
+Visit [the portal](https://zhuconv.github.io/portal/) for the site's pages and
+redirect links. Its directory is maintained in `portal/index.html`; update the
+matching entry when adding, changing, or removing a redirect. Copy buttons share
+the public short URLs. The portal is marked `noindex`.
+
 ## Paper images
 
 Paper figures can be kept as single-page PDFs in `images/papers`. Generate the
