@@ -1,2 +1,5 @@
 .demo/
 .DS_Store
+_site/
+.jekyll-cache/
+__pycache__/

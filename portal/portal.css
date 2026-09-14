@@ -155,14 +155,6 @@ html[data-theme="dark"] .portal-page .theme-sun {
   font-weight: 500;
 }
 
-.portal-duration {
-  margin-left: .5rem;
-  color: var(--portal-muted);
-  font-size: .78rem;
-  font-weight: 400;
-  white-space: nowrap;
-}
-
 .portal-destination:link,
 .portal-destination:visited {
   display: inline-block;
@@ -216,6 +208,17 @@ html[data-theme="dark"] .portal-page .theme-sun {
 
 .portal-site {
   margin-top: 38px;
+}
+
+.portal-pages {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.portal-empty {
+  padding: 22px 0;
+  color: var(--portal-muted);
 }
 
 .portal-home {
