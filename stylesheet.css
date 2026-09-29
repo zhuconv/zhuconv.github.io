@@ -913,6 +913,10 @@ body.image-lightbox-open {
     max-height: none;
   }
 
+  .research__content-teaser:not(:has(img)) {
+    display: none;
+  }
+
   .research__content-info-attribute {
     margin-top: 0.35rem;
   }
